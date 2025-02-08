@@ -50,3 +50,82 @@
 // 🌟 BONUS TIP:
 // 🎨 Style your cards using CSS to make them look polished!
 // 🤖 Try experimenting with different GitHub profiles!
+
+
+
+axios.get('https://api.github.com/users/abdillahi485')
+  .then(response => {
+    console.log(response.data); 
+
+    const userData = response.data;
+
+    createUserCard(userData);
+  })
+  .catch(error => {
+    console.error('Error fetching GitHub data:', error);
+  });
+
+function createUserCard(userData) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  const img = document.createElement('img');
+  img.src = userData.avatar_url;
+  img.alt = 'User Avatar';
+
+  const cardInfo = document.createElement('div');
+  cardInfo.classList.add('card-info');
+  const name = document.createElement('h3');
+  name.classList.add('name');
+  name.textContent = userData.name || 'No name provided';
+
+  const username = document.createElement('p');
+  username.classList.add('username');
+  username.textContent = userData.login;
+
+  const location = document.createElement('p');
+  location.textContent = `Location: ${userData.location || 'Not available'}`;
+
+  const profileLink = document.createElement('p');
+  profileLink.innerHTML = `Profile: <a href="${userData.html_url}" target="_blank">${userData.html_url}</a>`;
+
+  const followers = document.createElement('p');
+  followers.textContent = `Followers: ${userData.followers}`;
+
+  const following = document.createElement('p');
+  following.textContent = `Following: ${userData.following}`;
+
+  const bio = document.createElement('p');
+  bio.textContent = `Bio: ${userData.bio || 'No bio available'}`;
+
+  cardInfo.append(name, username, location, profileLink, followers, following, bio);
+
+  card.append(img, cardInfo);
+
+  const cardsContainer = document.querySelector('.cards');
+  cardsContainer.appendChild(card);
+}
+
+axios.get('https://api.github.com/users/abdillahi485/followers')
+  .then(response => {
+    console.log(response.data);
+
+    response.data.forEach(follower => {
+      createUserCard(follower);
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching followers data:', error);
+  });
+
+
+  const usernames = ['duraanali', '4hmedhabib', 'Abdiasis-Mustafe'];
+usernames.forEach(username => {
+  axios.get(`https://api.github.com/users/${username}`)
+    .then(response => {
+      createUserCard(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching GitHub data:', error);
+    });
+});

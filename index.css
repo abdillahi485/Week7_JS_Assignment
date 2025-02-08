@@ -95,32 +95,50 @@ body {
   width: 100%;
   padding: 20px;
   display: flex;
-  border-radius: 5px;
-  box-shadow: 0 1px 6px -2px #000;
-  background-color: #FFF;
+  border-radius: 10px; /* More rounded corners for a polished look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  background-color: #ffffff;
   margin-bottom: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow */
 }
 
 .card img {
   width: 150px;
   height: 150px;
-  border-radius: 3px;
+  border-radius: 50%; /* Round the image for a more modern look */
   margin-right: 20px;
+  object-fit: cover; /* Ensures the image fits nicely in the circle */
 }
 
 .card .name {
-  font-size: 3.4rem;
-}
-
-.card p {
-  font-size: 1.4rem;
-  margin-bottom: 3px;
+  font-size: 2.4rem; /* Adjusted for better readability */
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .card .username {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-style: italic;
-  margin: 3px 0 10px;
+  color: #777;
+  margin: 5px 0 15px;
+}
+
+.card p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.card .bio {
+  font-size: 1.4rem;
+  color: #444;
+  margin-top: 10px;
 }
 
 

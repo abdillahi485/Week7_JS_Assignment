@@ -106,18 +106,25 @@ function createUserCard(userData) {
   cardsContainer.appendChild(card);
 }
 
+
+
 axios.get('https://api.github.com/users/abdillahi485/followers')
   .then(response => {
     console.log(response.data);
 
     response.data.forEach(follower => {
-      createUserCard(follower);
+      axios.get(follower.url)
+        .then(followerResponse => {
+          createUserCard(followerResponse.data);
+        })
+        .catch(error => {
+          console.error('Error fetching follower data:', error);
+        });
     });
   })
   .catch(error => {
-    console.error('Error fetching followers data:', error);
+    console.error('Error fetching followers:', error);
   });
-
 
   const usernames = ['duraanali', '4hmedhabib', 'Abdiasis-Mustafe'];
 usernames.forEach(username => {
